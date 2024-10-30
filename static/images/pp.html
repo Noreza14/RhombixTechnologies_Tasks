@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio with Skills Progress Bar</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 243, 207);
+            
+}
+        
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: rgb(232, 200, 114);
+            color: black;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 250px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: rgb(53, 19, 19);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: rgb(255, 0, 0);
+        }
+
+        /* Content styles */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Section styling */
+        section {
+            padding: 60px 20px;
+        }
+
+        /* Introduction Section */
+#introduction {
+    display: flex;
+    justify-content: space-between; /* Places text on left and image on right */
+    align-items: center;
+    height: 100vh; /* Full height section */
+    background-color: rgb(255, 243, 207);
+    padding: 0 50px; /* Adjust padding as needed */
+}
+
+/* Content Section */
+.intro-content {
+    width: 50%; /* Adjust the width if needed */
+}
+
+.intro-content h1 {
+    font-size: 55px;
+    margin: 0;
+    color: rgb(66, 26, 26);
+    animation: fadeInSlideDown 2s ease-out;
+}
+
+.intro-content h3 {
+    font-size: 30px;
+    margin: 10px 0;
+    color: #cbd81b;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.intro-content p {
+    font-size: 16px;
+    margin-top: 15px;
+    line-height: 1.6;
+    color: rgb(0, 0, 0);
+    animation: fadeIn 4s ease-in-out;
+}
+
+/* Image Section */
+.intro-image {
+    width: 50%; /* Adjust the width if needed */
+    text-align: right; /* Align image to the right side */
+}
+
+.intro-image img {
+    width: 90%; /* Control image width */
+    height: auto;
+    border-radius: 10px; /* Optional: rounded corners */
+}
+
+
+        /* Education Section */
+#education {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 0;
+}
+
+/* Education Box with Blue Border */
+.education-box {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    background-color: transparent; /* No background color */
+    padding: 10px; /* Reduced padding */
+    border-radius: 20px; /* Adjusted border-radius for smaller size */
+    border: 2px solid rgb(201, 177, 100); /* Blue border around each education box */
+    margin-bottom: 20px;
+    width: 80%; /* Set a specific width to reduce box size */
+    max-width: 800px; /* Optional: Max width to prevent oversized boxes */
+    box-shadow: none; /* Optional: Adjust as needed */
+}
+
+/* Image with Yellow Frame */
+.education-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 2px ; /* Yellow frame around the picture */
+    margin-right: 30px;
+}
+
+.education-details {
+    max-width: 600px;
+}
+
+.education-details h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.education-details p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+
+
+       /* Skills Section */
+       .skills-section {
+      width: 80%;
+      margin: 30px auto;
+      
+    }
+
+    /* Section Title */
+    .skills-title {
+      font-size: 34px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 35px;
+      margin-left: 0;
+    }
+
+    /* Flex container for the two main boxes */
+    .skills-container {
+      display: flex;
+      gap: 90px;
+      justify-content: space-between;
+    }
+
+    /* Individual box styling */
+    .skill-box {
+      flex: 1;
+      border: 2px solid #dace64; /* Adding a border around each box */
+      padding: 20px;
+      border-radius: 10px; /* Optional: rounded corners */
+    }
+
+    /* Skill row style */
+    .skill-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px; /* Padding inside each skill row */
+      border: 1px solid #ddd; /* Border around each skill row */
+      border-radius: 5px; /* Optional: rounded corners for each skill row */
+    }
+
+    .skill-name {
+      flex: 1;
+      font-weight: bold;
+    }
+
+    .skill-bar {
+      width: 150px;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: #ff9306;
+    }
+
+    .skill-percentage {
+      margin-left: 10px;
+    }
+
+
+        #projects {
+        padding: 70px 20px;
+        text-align: left;
+        font-size: 20px;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        justify-items: center;
+    }
+
+    .project-box {
+        background-color: transparent; /* No background color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        text-align: left;
+        border: 2px solid rgb(235, 217, 138)
+    }
+
+    .project-img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .project-details {
+        margin-top: 15px;
+    }
+
+    .project-full-details {
+        margin-top: 10px;
+        display: none;
+    }
+
+    .see-more-btn {
+        background-color: #ff6347;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .see-more-btn:hover {
+        background-color: #e5533d;
+    }
+ /* experience */
+#experience {
+    padding: 50px 0;
+    background-color: transparent;
+    margin-bottom: 30px;
+}
+
+.experience-header h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+    text-align: left; /* Aligns the heading to the left */
+    margin-bottom: 30px;
+}
+
+.internship-box {
+    margin-top: 70px;
+    background-color: rgb(243, 216, 166);
+    padding: 20px 40px;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+.internship-info h3 {
+    font-size: 20px;
+    color: #777;
+    margin: 20px 0; /* Increase margin below the title */
+    text-align: center;
+}
+.internship-info h4 {
+    font-size: 20px;
+    color:black;
+    margin: 20px 0; /* Increase margin below the title */
+    text-align: center;
+}
+
+
+
+.internship-info p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 20px; /* Add margin on top of the paragraph */
+
+}
+       
+      /* Contact Section */
+#contact {
+    padding: 50px 20px;
+    background-color: transparent;
+}
+
+.contact-content {
+    max-width: 800px;
+    margin: auto;
+    text-align: left;
+}
+
+.contact-content h1 {
+    font-size: 36px;
+    color: #2e1f1f;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.contact-content p {
+    font-size: 18px;
+    color: #4d2525;
+    margin-bottom: 30px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-form input, .contact-form textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.send-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.send-btn:hover {
+    background-color: #e5533d;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.social-links a:hover img {
+    transform: scale(2.1);
+}
+
+     
+        /* Animations */
+        @keyframes fadeInSlideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInSkill {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="nz.jpeg" alt="Profile Picture" class="profile-pic">
+            <h2>Noreza Rajpoot</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li> <!-- New Projects Section -->
+                <li><a href="#experience">Experience</a></li> <!-- New Experience Section -->
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Introduction Section -->
+        <section id="introduction">
+            <div class="intro-content">
+                <h1>Hi, I am Noreza Shahid</h1>
+                <h3>Front-End Developer</h3>
+                <p>As a passionate developer, I specialize in creating visually appealing, interactive, and user-friendly websites that bring ideas to life with code. Let's work together to build something amazing.</p>
+               
+            </div>
+
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h1>Education</h1>
+            <!-- Intermediate Education Box -->
+            <div class="education-box">
+                <img src="rabia basri 2.jpeg" alt="College Picture">
+                <div class="education-details">
+                    <h3>Intermediate in Computer Science</h3>
+                    <p>Completed my Intermediate from <b>Rabia Basri College for Women</b>  in 2020, focusing on Computer Science, Mathematics, and Statstic.</p>
+                </div>
+            </div>
+
+            <!-- BS Education Box -->
+            <div class="education-box">
+                <img src="Gulberg clg.jpeg" alt="University Picture">
+                <div class="education-details">
+                    <h3>Bachelor of Science in Computer Science (BSCS)</h3>
+                    <p>Graduated from <B>Lahore College Women University</B>  in 2025, specializing in Software Engineering, Web Development.</p>
+                </div>
+            </div>
+        </section>
+         
+        <!-- skill section -->
+         <section>
+            <div class="skills-section">
+                <div class="skills-title">Skills</div>
+                <div class="skills-container">
+                  <!-- Left Box -->
+                  <div class="skill-box">
+                    <div class="skill-row">
+                      <div class="skill-name">HTML</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                      </div>
+                      <div class="skill-percentage">85%</div>
+                    </div>
+                    <div class="skill-row">
+                      <div class="skill-name">CSS</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                      </div>
+                      <div class="skill-percentage">80%</div>
+                    </div>
+                    <div class="skill-row">
+                      <div class="skill-name">Java</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 55%"></div>
+                      </div>
+                      <div class="skill-percentage">55%</div>
+                    </div>
+                  </div>
+            
+                  <!-- Right Box -->
+                  <div class="skill-box">
+                    <div class="skill-row">
+                      <div class="skill-name">MySQL</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                      </div>
+                      <div class="skill-percentage">95%</div>
+                    </div>
+                    <div class="skill-row">
+                      <div class="skill-name">SPSS</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                      </div>
+                      <div class="skill-percentage">85%</div>
+                    </div>
+                    <div class="skill-row">
+                      <div class="skill-name">NGINX</div>
+                      <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                      </div>
+                      <div class="skill-percentage">70%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         </section>
+
+       <!-- Projects Section -->
+<section id="projects">
+    <h1 style="text-align: left;   display: inline-block; padding-bottom: 5px;">
+        MY Projects
+    </h1>
+
+    <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-box">
+            <img src="nginx project.png" alt="Project 1 Image" class="project-img">
+            <div class="project-details">
+                <h3>NGINX live streaming</h3>
+                <p><strong>Role:</strong> Lead Developer</p>
+                <p><strong>Tech Used:</strong> HTML, PYTHON , FFMRG , ,env file , git control version, reverse proxy, routing</p>
+                <p><strong>Outcomes:</strong>Achieved a scalable live streaming solution with NGINX and HLS, ensuring seamless adaptive streaming and efficient media delivery.</p>
+                <button class="see-more-btn" onclick="toggleDetails('project1-details')">See More</button>
+                <div id="project1-details" class="project-full-details" style="display: none;">
+                    <p>In this project, I designed and developed a scalable media streaming and delivery system using NGINX, FFMPEG, and a combination of proxy and reverse proxy techniques. The primary focus was to leverage NGINX's flexibility to serve as a reverse proxy and load balancer, efficiently managing incoming traffic and routing requests to backend servers based on dynamic conditions.
+
+                        To support video delivery, I integrated HLS (HTTP Live Streaming), utilizing FFMPEG to transcode and segment video content into adaptive bitrates. This provided a smooth streaming experience across various devices and network conditions. I set up NGINX to handle requests securely and efficiently, acting as a proxy server between the client and backend services. Sensitive configurations were handled using environment files (.env), ensuring secure and organized management of credentials and settings.
+                        
+                        Version control for the project was maintained with GIT, facilitating collaborative development and code versioning. Python scripting was employed to automate server configurations, media processing tasks, and routing logic. This resulted in a streamlined deployment workflow and reduced manual intervention. The overall solution included automated traffic routing, load balancing, and video streaming, enhancing both the scalability and user experience of the system.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-box">
+            <img src="DB 1.jpeg" alt="Project 2 Image" class="project-img">
+            <div class="project-details">
+                <h3>Stationery Management System Database</h3>
+                <p><strong>Role:</strong>back end developer</p>
+                <p><strong>Tech Used:</strong>PHP,MySQL</p>
+                <p><strong>Outcomes:</strong> Successfully launched an Software managment system</p>
+                <button class="see-more-btn" onclick="toggleDetails('project2-details')">See More</button>
+                <div id="project2-details" class="project-full-details" style="display: none;">
+                    <p> The Stationery Management System Database project aimed to efficiently manage inventory, track purchases, and streamline office supply distribution within an organization. Built using MySQL, the database featured key tables like Products, Suppliers, Orders, Employees, and Inventory Transactions, with well-defined relationships to maintain data integrity. It allowed for accurate tracking of inventory levels, order histories, and supplier details, using triggers and stored procedures to automatically update stock. The system provided powerful search and reporting capabilities, enabling real-time monitoring and minimizing stock discrepancies, resulting in a more organized and efficient management of office supplies. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Experience-->
+<section id="experience">
+    <div class="experience-header">
+        <h1>Professional Experience</h1>
+        
+    </div>
+
+    <div class="experience-content">
+        <div class="internship-box">
+            <div class="internship-info">
+                <h3>Internship at Arfa Software Technology Park</h3>
+                <h4>PITB Company </h4>
+                <!-- Add the image below the internship details -->
+                   <img src="PITB.png" alt="Internship Experience" style="width: 70%; max-width: 200px; display: block; margin: 20px auto; border-radius: 10px;">
+
+                <p>
+                    During my internship at Punjab Information Technology Board (PITB), I gained hands-on experience in software development and IT management. I worked on real-time projects, collaborating with expert teams to enhance system efficiency, streamline IT services, and assist in deploying scalable solutions. This internship helped me develop technical skills in software engineering, foster teamwork, and broaden my understanding of large-scale IT infrastructure.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+      <!-- Contact Section -->
+<section id="contact">
+    <div class="contact-content">
+        <h1>Contact Us</h1>
+        <p>Get in touch or shoot me an email directly on <a href="mailto:norezashahid14@gmail.com" style="color: #ff6347;">norezashahid14@gmail.com</a></p>
+        <form action="send_email.php" method="post" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="send-btn">SEND</button> 
+            
+            <form action="http://localhost:5000/send_email" method="post" class="contact-form">
+                <!-- Add your form fields here -->
+            </form>
+            
+            
+            
+        </form>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nzrajpoot.1418" target="_blank"><img src="insta logo.png" alt="Instagram Logo"></a>
+            <a href="https://github.com/Noreza14" target="_blank"><img src="github logo.png" alt="GitHub Logo"></a>
+            <a href="https://www.linkedin.com/Noreza Shahid" target="_blank"><img src="linked in.png" alt="LinkedIn Logo"></a>
+            <a href="https://wa.me/03249892143" target="_blank"><img src="whatsapp.png" alt="WhatsApp Logo"></a>
+        </div>
+    </div>
+</section>
+
+    <!-- JavaScript for toggling project details -->
+<script>
+    function toggleDetails(id) {
+        const element = document.getElementById(id);
+        if (element.style.display === "none" || element.style.display === "") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
+
+
